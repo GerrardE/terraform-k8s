@@ -1,0 +1,12 @@
+node_modules
+npm-debug.log
+Dockerfile
+.git
+.gitignore
+README.md
+ecosystem.config.js
+.terraform
+spec
+.env.example
+build
+prometheus

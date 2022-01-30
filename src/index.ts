@@ -1,18 +1,15 @@
 import express from "express";
 import bodyParser from "body-parser";
-import debug from "debug";
-import logger from "morgan";
 import { config } from "dotenv";
 import cors from "cors";
-import apis from "./logic/index";
+import * as routers from "./logic";
+
 
 const app: express.Application = express();
 
 const port = process.env.PORT || 3000;
 
 const address = `0.0.0.0:${port}`;
-
-const debugged = debug("index");
 
 config();
 
@@ -27,12 +24,10 @@ app.use(cors({
   optionsSuccessStatus: 204
 }));
 
-app.use(logger("dev"));
-
-app.use("/api/v1", apis);
+app.use("/", routers.baseRouter);
+app.use("/metrics", routers.metricsRouter);
 
 const index = app.listen(port, () => {
-  debugged(`starting app on: ${address}`);
   console.log(`starting app on: ${address}`);
 });
 

@@ -1,8 +1,2 @@
-import express from "express";
-import baseRouter from "./base.logic";
-
-const apiRouter = express.Router();
-
-apiRouter.use("/", baseRouter);
-
-export default apiRouter;
+export { default as baseRouter} from "./base.logic";
+export { default as metricsRouter} from "./metrics.logic";

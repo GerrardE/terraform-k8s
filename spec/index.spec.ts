@@ -12,7 +12,7 @@ interface IData {
 }
 
 describe("INDEX TESTS >> :", function () {
-  axios.defaults.baseURL = `http://${process.env.HOST}:${process.env.PORT}/api/v1`;
+  axios.defaults.baseURL = `http://${process.env.HOST}:${process.env.PORT}/`;
   const message =
     "Welcome to the terraform-k8s API, here are the details of your request:";
 

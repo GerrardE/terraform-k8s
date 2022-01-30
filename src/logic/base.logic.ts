@@ -1,5 +1,4 @@
-import express from "express";
-import { Response, Request } from "express";
+import express, { Response, Request } from "express";
 import { statusCode } from "../domain/enums/statusCode.enum";
 import { createResponse } from "../factory/response.factory";
 

@@ -1,0 +1,44 @@
+version: "3.9"
+services:
+  dryrun:
+    container_name: "dryrun"
+    environment:
+      NODE_ENV: "${NODE_ENV}"
+      PORT: "${PORT}"
+    build:
+      context: .
+      target: buildstage1
+    networks:
+      - monitoring
+
+  production:
+    container_name: "terraform-k8s"
+    environment:
+      NODE_ENV: "${NODE_ENV}"
+      PORT: "${PORT}"
+    build:
+      context: .
+      target: buildstage2
+    ports:
+      - "${PORT}:3000"
+    networks:
+      - monitoring
+  
+  prometheus:
+    image: prom/prometheus:v2.33.0
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    ports:
+      - 9090:9090
+    expose:
+      - 9090
+    networks:
+      - monitoring
+
+networks:
+  monitoring:
+    driver: bridge
+volumes:
+    prometheus_data: {}
